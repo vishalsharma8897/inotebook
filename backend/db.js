@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongoUri = "mongodb://127.0.0.1:27017";
+const mongoUri = "mongodb://127.0.0.1:27017"; // connection string
 
 const  connectToMongo= async()=>{
    await mongoose.connect(mongoUri).then(()=>{
@@ -7,7 +7,7 @@ const  connectToMongo= async()=>{
    }).catch((err)=>{
        console.err("could not connect due to " + err);
    })
-   return 0;
+   
 }
 
-module.exports=connectToMongo;
+module.exports=connectToMongo;  // m.e

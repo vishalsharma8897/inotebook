@@ -1,12 +1,14 @@
-const connectToMongo= require("./db");
+const connectToMongo= require("./db");// imported connectToMongo for connection 
 const express = require("express");
 const app = express();
-connectToMongo();
 
 
-app.get('/',(req,res)=>{
-    res.send("Hello world");
-});
+connectToMongo();  // connected 
+
+// Availbale routes;
+app.use('/api/auth',require('./routes/auth'));    // router object wiil be replaced by require(...) and  wiill act as a middleware function 
+app.use('/api/notes',require('./routes/notes'));
+
 
 
 app.listen(8080,()=>{
