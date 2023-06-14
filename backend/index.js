@@ -2,7 +2,7 @@ const connectToMongo= require("./db");// imported connectToMongo for connection
 const express = require("express");
 const app = express();
 
-
+app.use(express.json());
 connectToMongo();  // connected 
 
 // Availbale routes;
