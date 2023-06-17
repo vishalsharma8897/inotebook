@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const User = require("../models/User");
 const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
+const secretKey = 'VishalKOG_Developer'; //with your own secret key
 
 
 
@@ -51,7 +53,15 @@ router.post("/createuser", [
     await user.save();
 
     // Return success response
-    res.json({ message: "User created successfully" });
+
+    const data = user.id;
+    
+    const token = jwt.sign(data, secretKey);
+    // console.log(token);
+    // res.json({token:token});
+
+    res.json({token});
+
   } catch (error) {
     // Handle any error that occurs during the user creation process
     console.error(error);
