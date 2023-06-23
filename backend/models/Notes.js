@@ -1,18 +1,23 @@
-const mongooose = require("mongoose");
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose; // using Schema ki naam ki class as a property of mongoose object , destructuring
 
 const NotesSchema = new Schema({
+
+   userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+   },
    title:{
-    type:string,
+    type:String,
     required:true, 
    },
    desc:{
-    type:string,
+    type:String,
     required:true, 
    },
    tag:{
-    type:string,
+    type:String,
     default:"General"
    },
    date:{
@@ -21,4 +26,4 @@ const NotesSchema = new Schema({
    }
 });
 
-module.exports=mongooose.model("notes",NotesSchema);
+module.exports=mongoose.model("Notes",NotesSchema);

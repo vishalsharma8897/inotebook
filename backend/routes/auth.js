@@ -11,14 +11,14 @@ const fetchuser= require("../middleware/fetchuser");
 
 //Route 1: route to create the user api/auth/createuser
 router.post("/createuser", [
-  [
+  
     // Define validation rules using express-validator's check function
     body("name").isLength({ min: 5 }).withMessage("Name must has atleast 5 characters"),
     body("email").isEmail().withMessage("Invalid Email"),
     body("password")
       .isLength({ min: 6 })
       .withMessage("Password must be at least 6 characters"),
-  ],
+  
 ], async (req, res) => {
   // validation errors;
 
@@ -105,9 +105,7 @@ try {
       const token = jwt.sign(data, secretKey);
   
       res.json({token}); // token is a string {token} is a  object ;
-
-      
-
+     
      }
 
   }
