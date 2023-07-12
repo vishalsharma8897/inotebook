@@ -12,7 +12,7 @@ const SignUp = () => {
  
     const devApiUrl = 'http://localhost:8080/api';
     // Production environment
-    const prodApiUrl = 'https://your-app.render.com/api';
+    const prodApiUrl = 'https://inotebook-app-mine.onrender.com';
     
     // Determine the API URL based on the environment
     const apiUrl = process.env.NODE_ENV === 'production' ? prodApiUrl : devApiUrl;
