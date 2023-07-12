@@ -1,5 +1,6 @@
 const connectToMongo= require("./db");// imported connectToMongo for connection 
 const express = require("express");
+let port = process.env.PORT || 8080;
 const cors = require("cors");
 const app = express();
 app.use(cors());
@@ -12,6 +13,6 @@ app.use('/api/notes',require('./routes/notes'));
 
 
 
-app.listen(8080,()=>{
+app.listen(port,()=>{
     console.log("Server started at port 8080");
 })

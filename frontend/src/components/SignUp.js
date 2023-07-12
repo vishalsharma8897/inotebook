@@ -8,7 +8,14 @@ const SignUp = () => {
     const refPassword = useRef(null);
     const refCPassword = useRef(null);
 
-    const host = "http://localhost:8080"
+
+ 
+    const devApiUrl = 'http://localhost:8080/api';
+    // Production environment
+    const prodApiUrl = 'https://your-app.render.com/api';
+    
+    // Determine the API URL based on the environment
+    const apiUrl = process.env.NODE_ENV === 'production' ? prodApiUrl : devApiUrl;
 
     const navigate = useNavigate();
 
@@ -29,7 +36,7 @@ const SignUp = () => {
            }
   
           e.preventDefault();
-          const url = `${host}/api/auth/createuser`
+          const url = `${apiUrl}/api/auth/createuser`
           const response = await fetch(url, {
               method: "POST", // *GET, POST, PUT, DELETE, etc
               headers: {
