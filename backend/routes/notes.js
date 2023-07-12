@@ -37,7 +37,7 @@ router.post("/addnote", fetchuser, [
     }
 
     const { title, desc, tag } = req.body;
-
+   console.log(tag);
     try {
     const note = new Notes({ userId, title, desc, tag });
     const savenote = await note.save();
@@ -74,7 +74,7 @@ router.put("/updatenote/:id",fetchuser, [
     // find the note to be updated and update it :
     const note = await Notes.findById(req.params.id);
     if(!note)
-    res.status(404).send("Not found");
+     return res.status(404).send("Not found");
     
     // any other user should not update notes of others;
     if(note.userId.toString()!=req.userId)
@@ -84,7 +84,7 @@ router.put("/updatenote/:id",fetchuser, [
     
     res.json(updatedNote);
     } catch (error) {
-        console.error(err);
+        console.error(error);
         res.status(500).send("Internal Server Error");
     }
     
@@ -98,7 +98,7 @@ router.delete("/deletenote/:id",fetchuser,async(req,res)=>{
     // find the note to be updated and update it :
     const note = await Notes.findById(req.params.id);
     if(!note)
-    res.status(404).send("Not found");
+    return res.status(404).send("Not found");
     
     // any other user should not update notes of others;
     if(note.userId.toString()!=req.userId)

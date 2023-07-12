@@ -1,13 +1,14 @@
-import React ,{ useEffect}from 'react'
-import { Link,useLoaderData,useLocation } from 'react-router-dom';
+import React from 'react'
+import { Link,useLocation ,useNavigate} from 'react-router-dom';
 const Navbar = () => {
       const location= useLocation();
+      
+      const navigate= useNavigate();
 
-        useEffect(()=>{
-          console.log(location.pathname);
-        },[location]);
-
-
+      const handleOnLogout=()=>{
+        localStorage.removeItem("token");
+        navigate('/login');
+      }
     return (
    
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,19 +27,18 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <Link className={`nav-link ${location.pathname=='/about'? "active":''}`} aria-current="page" to="/about">About</Link>
                             </li>
-                           
 
 
 
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                       { !localStorage.getItem("token") ? <div className="d-flex" >
+                         {location.pathname!=='/login'&& <Link className="btn btn-outline-light mx-2 btn-sm" to="/login" role="button">Login</Link>}
+                        {location.pathname!=='/signUp'&& <Link className="btn btn-light mx-2 btn-sm" to="/signUp" role="button">SignUp</Link>}
+                        </div>:<button className='btn btn-primary' onClick={handleOnLogout}>Log Out</button>}
                     </div>
                 </div>
             </nav>
-       
+
     )
 }
 

@@ -1,7 +1,8 @@
 const connectToMongo= require("./db");// imported connectToMongo for connection 
 const express = require("express");
+const cors = require("cors");
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 connectToMongo();  // connected 
 
@@ -12,5 +13,5 @@ app.use('/api/notes',require('./routes/notes'));
 
 
 app.listen(8080,()=>{
-    console.log("server started at port 8080");
+    console.log("Server started at port 8080");
 })

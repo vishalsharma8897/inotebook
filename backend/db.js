@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const mongoUri = "mongodb://127.0.0.1:27017/inotebook"; // connection string
+const mongoUri = "mongodb+srv://vishalsharma19052001:TRfE2yvjHO69xyrk@cluster0.zptw4x5.mongodb.net/inotebook"; // connection string
 
 const  connectToMongo= async()=>{
    await mongoose.connect(mongoUri).then(()=>{
-    console.log("connected succesfully");
+    console.log(" Database connected succesfully");
    }).catch((err)=>{
-       console.err("could not connect due to " + err);
+       console.err("Db could not connect due to " + err);
    })
    
 }

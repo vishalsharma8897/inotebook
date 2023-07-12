@@ -24,7 +24,7 @@ router.post("/createuser", [
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ success:false ,  errors: errors.array() });
   }
 
   const { name, email, password } = req.body;
@@ -32,15 +32,15 @@ router.post("/createuser", [
     // Check if the user already exists
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.status(400).json({ success:false ,  error: "User already exists" });
     }
 
     // finding the securedpassword for the user by using brypt.js library ;
     // Generate a salt
-    const salt = await bcrypt.genSaltSync(10);
+    const salt =  bcrypt.genSaltSync(10);
 
     // Hash the password using the generated salt
-    const hashedPassword = await bcrypt.hashSync(password, salt);
+    const hashedPassword =  bcrypt.hashSync(password, salt);
     
     // Create a new user instance
     user = new User(
@@ -61,12 +61,12 @@ router.post("/createuser", [
     // console.log(token);
     // res.json({token:token});
 
-    res.json({token});
+    res.json({success:true , token});
 
   } catch (error) {
     // Handle any error that occurs during the user creation process
     console.error(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({  success:false , error: "Server error" });
   }
 
 
@@ -82,7 +82,7 @@ router.post("/login",[
 // check for any validation errors here
 const errors = validationResult(req);
 if (!errors.isEmpty()) {
-  return res.status(400).json({ errors: errors.array() });
+  return res.status(400).json({  success:false , errors: errors.array() });
 }
 
 const {email,password}= req.body;
@@ -98,24 +98,24 @@ try {
     const match = await bcrypt.compare(password, storedHashedPassword);
 
     if(!match) {
-      res.status(400).json({ message: "please try to login with correct Crediantials" });     
+      res.status(400).json({  success:false , message: "please try to login with correct Crediantials" });     
     }
     else {
       const data = user.id;
       const token = jwt.sign(data, secretKey);
   
-      res.json({token}); // token is a string {token} is a  object ;
+      res.json({success:true , token}); // token is a string {token} is a  object ;
      
      }
 
   }
   else {
-    res.status(400).json({ message: "please try to login with correct Crediantials" });
+    res.status(400).json({ success:false , message: "please try to login with correct Crediantials" });
   }
 
 } catch (error) {
   console.log(error);
-  res.status(500).json({ error: "server error" });
+  res.status(500).json({ success:false ,  error: "server error" });
 }
 
 });
@@ -127,11 +127,11 @@ try {
       const userId = req.userId;
       const user = await User.findById(userId).select("-password");
        
-       res.status(200).json(user);
+       return res.status(200).json({success:true , user});
 
    } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ success:false ,  error: "server error" });
    }
  })
 
