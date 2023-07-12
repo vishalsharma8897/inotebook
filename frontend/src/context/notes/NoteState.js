@@ -4,12 +4,12 @@ import NoteContext from "./NoteContext"
 const NoteState = (props) => {
 
  
-  const devApiUrl = 'http://localhost:8080/api';
+
   // Production environment
   const prodApiUrl = 'https://inotebook-app-mine.onrender.com';
   
   // Determine the API URL based on the environment
-  const apiUrl = process.env.NODE_ENV === 'production' ? prodApiUrl : devApiUrl;
+
   
   const notesInitial = [];
 
@@ -33,7 +33,7 @@ const NoteState = (props) => {
 
   const addNote = async(title, desc, tag) => {
   
-    const url = `${apiUrl}/api/notes/addNote`
+    const url = `${prodApiUrl}/api/notes/addNote`
     const response = await fetch(url, {
       method: "POST", // *GET, POST, PUT, DELETE, etc
       headers: {

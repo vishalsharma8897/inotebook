@@ -7,12 +7,12 @@ const Login = () => {
     const refPassword = useRef(null);
   
  
-    const devApiUrl = 'http://localhost:8080/api';
+    
     // Production environment
     const prodApiUrl = 'https://inotebook-app-mine.onrender.com';
     
     // Determine the API URL based on the environment
-    const apiUrl = process.env.NODE_ENV === 'production' ? prodApiUrl : devApiUrl;
+   
 
     const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const Login = () => {
          }
 
         e.preventDefault();
-        const url = `${apiUrl}/api/auth/login`
+        const url = `${prodApiUrl}/api/auth/login`
         const response = await fetch(url, {
             method: "POST", // *GET, POST, PUT, DELETE, etc
             headers: {
