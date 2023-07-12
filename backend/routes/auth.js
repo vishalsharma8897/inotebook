@@ -66,7 +66,7 @@ router.post("/createuser", [
   } catch (error) {
     // Handle any error that occurs during the user creation process
     console.error(error);
-    res.status(500).json({  success:false , error: "Server error" });
+    res.status(500).json({ success:false ,  error: error});
   }
 
 
@@ -115,7 +115,7 @@ try {
 
 } catch (error) {
   console.log(error);
-  res.status(500).json({ success:false ,  error: "server error" });
+  res.status(500).json({ success:false ,  error: error});
 }
 
 });
@@ -131,7 +131,7 @@ try {
 
    } catch (error) {
     console.log(error);
-    res.status(500).json({ success:false ,  error: "server error" });
+    res.status(500).json({ success:false ,  error: error});
    }
  })
 
